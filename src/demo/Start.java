@@ -12,9 +12,8 @@ public class Start {
 
     public static void main(String[] args) {
 
-        MainForm mainForm = new MainForm();
         DefenceObservable observable = new DefenceObservable();
-
+        MainForm mainForm = new MainForm(observable);
         observable.addObserver(new Helicopter(mainForm));
         observable.addObserver(new Submarine(mainForm));
         observable.addObserver(new Tank(mainForm));

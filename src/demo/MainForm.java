@@ -9,13 +9,13 @@ package demo;
  * @author User
  */
 public class MainForm extends javax.swing.JFrame implements DefenceObserver{
-
-    /**
-     * Creates new form MainForm
-     */
-    public MainForm() {
+    public boolean isClicked;
+    DefenceObservable observerble;
+    public MainForm(DefenceObservable observerble) {
         initComponents();
+        this.observerble=observerble;
         setVisible(true);
+        isClicked=false;
     }
 
     /**
@@ -29,7 +29,7 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
 
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jBox = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -46,12 +46,18 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
         jTextArea3 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controll Room");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Collect Informations");
 
-        jCheckBox1.setText("Area Clear");
+        jBox.setText("Area Clear");
+        jBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoxActionPerformed(evt);
+            }
+        });
 
         txtArea.setColumns(20);
         txtArea.setRows(5);
@@ -63,7 +69,19 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
 
         jLabel1.setText("Fuel Amount");
 
+        jSlider1.setValue(0);
+        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider1StateChanged(evt);
+            }
+        });
+
         btnSend.setText("Send");
+        btnSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendActionPerformed(evt);
+            }
+        });
 
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
@@ -85,7 +103,7 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(74, 74, 74)
-                        .addComponent(jCheckBox1))
+                        .addComponent(jBox))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(268, 268, 268)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -122,7 +140,7 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jBox))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
@@ -160,12 +178,39 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
+        String txt=getTitle()+"  :  "+txtMsg.getText();
+        observerble.sendMessages(txt);
+        txtMsg.setText("");
+        
+        
+    }//GEN-LAST:event_btnSendActionPerformed
+
+    private void jBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxActionPerformed
+        if (jBox.isSelected()) {
+            
+            observerble.setBox("Area Cleared");
+            isClicked=true;
+        }else{
+            observerble.setBox("Area Not Cleared");
+        }
+    }//GEN-LAST:event_jBoxActionPerformed
+
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        if (isClicked) {
+            
+            int value=jSlider1.getValue();
+            observerble.setValue(value);
+            
+        }
+    }//GEN-LAST:event_jSlider1StateChanged
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;
+    private javax.swing.JCheckBox jBox;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -185,5 +230,15 @@ public class MainForm extends javax.swing.JFrame implements DefenceObserver{
     @Override
     public void sendMessage(String msg) {
          txtArea.append(msg + "\n\n");
+    }
+
+    @Override
+    public void areaCleared(String msg) {
+        
+    }
+
+    @Override
+    public void update(int value) {
+        
     }
 }

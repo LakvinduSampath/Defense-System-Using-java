@@ -21,6 +21,28 @@ public class DefenceObservable {
     public void addObserver(DefenceObserver ob){
     obList.add(ob);
     }
+    
+    public void sendMessages(String msg){
+        for (DefenceObserver list : obList) {
+            list.sendMessage(msg);
+        }
+    }
+    
+    public void setBox(String msg){
+        
+        for (DefenceObserver list : obList) {
+            list.areaCleared(msg);
+        }
+    
+    }
+    
+    public void setValue(int value){
+        
+        for (DefenceObserver list : obList) {
+            list.update(value);
+        }
+    
+    }
 
     
     

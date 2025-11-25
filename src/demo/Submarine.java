@@ -11,10 +11,15 @@ package demo;
 public class Submarine extends javax.swing.JFrame implements DefenceObserver {
 
     MainForm mainForm;
-    public Submarine( MainForm mainForm) {
+
+    public Submarine(MainForm mainForm) {
         initComponents();
-        this.mainForm=mainForm;
+        this.mainForm = mainForm;
         setVisible(true);
+        btnShoot.setEnabled(false);
+        Btn2Missile.setEnabled(false);
+        btnTMissile.setEnabled(false);
+        btnMissile.setEnabled(false);
     }
 
     /**
@@ -30,16 +35,16 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
         jLabel2 = new javax.swing.JLabel();
         jSpinner2 = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblClear = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
+        btnMissile = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
-        jButton3 = new javax.swing.JButton();
+        Btn2Missile = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        txtArea = new javax.swing.JTextArea();
+        btnTMissile = new javax.swing.JButton();
+        btnShoot = new javax.swing.JButton();
         txtMsg = new javax.swing.JTextField();
         jSlider2 = new javax.swing.JSlider();
 
@@ -57,7 +62,7 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
 
         jLabel3.setText("Ammo Count");
 
-        jLabel1.setText("Area Not Cleard");
+        lblClear.setText("Area Not Cleard");
 
         jCheckBox1.setText("Position");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,29 +71,29 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
             }
         });
 
-        jButton2.setText("Missile Operation");
+        btnMissile.setText("Missile Operation");
 
         jSlider1.setOrientation(javax.swing.JSlider.VERTICAL);
 
-        jButton3.setText("Trident -2 Missile");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Btn2Missile.setText("Trident -2 Missile");
+        Btn2Missile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Btn2MissileActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
-        jButton4.setText("Tomahawk Missile");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnTMissile.setText("Tomahawk Missile");
+        btnTMissile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnTMissileActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Shoot");
+        btnShoot.setText("Shoot");
 
         txtMsg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,15 +119,16 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(btnTMissile, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                                        .addComponent(Btn2Missile, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(lblClear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btnShoot, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                                        .addGap(34, 34, 34)
+                                        .addComponent(btnMissile, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(83, 83, 83)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -147,15 +153,15 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblClear, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnMissile, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShoot, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Btn2Missile, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTMissile, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -190,13 +196,13 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Btn2MissileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn2MissileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Btn2MissileActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnTMissileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTMissileActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnTMissileActionPerformed
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         String msg = getTitle() + "  :  " + txtMsg.getText();
@@ -210,16 +216,14 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
         txtMsg.setText("");
     }//GEN-LAST:event_txtMsgActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn2Missile;
+    private javax.swing.JButton btnMissile;
     private javax.swing.JButton btnSend;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btnShoot;
+    private javax.swing.JButton btnTMissile;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -227,12 +231,33 @@ public class Submarine extends javax.swing.JFrame implements DefenceObserver {
     private javax.swing.JSlider jSlider2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblClear;
+    private javax.swing.JTextArea txtArea;
     private javax.swing.JTextField txtMsg;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void sendMessage(String msg) {
+        txtArea.setText(msg);
+    }
 
+    @Override
+    public void areaCleared(String msg) {
+        lblClear.setText(msg);
+    }
+
+    @Override
+    public void update(int value) {
+        if (value >= 25) {
+            btnShoot.setEnabled(true);
+        }
+        if (value >= 50) {
+            btnMissile.setEnabled(true);
+        }
+        if (value >= 75) {
+            Btn2Missile.setEnabled(true);
+        }else{
+            btnTMissile.setEnabled(true);
+        }
     }
 }

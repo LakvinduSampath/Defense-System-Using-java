@@ -11,5 +11,7 @@ package demo;
 public interface DefenceObserver {
     
     public void sendMessage(String msg);
+    public void areaCleared(String msg);
+    public void update(int value);
     
 }
